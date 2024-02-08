@@ -17,6 +17,7 @@ export class Snake extends AcGameObject {
         this.step = 0;
         this.eps = 1e-2;
         this.eye_direction = 0;
+        if (this.id === 1) this.eye_direction = 2;
         this.eye_dx = [
             [-1, 1],
             [1, 1],
