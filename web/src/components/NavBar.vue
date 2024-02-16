@@ -17,7 +17,7 @@
         <ul class="navbar-nav" v-if="$store.state.user.is_login">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              {{$store.state.user.username}}
+              {{ $store.state.user.username }}
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li>
@@ -49,17 +49,18 @@
 <script>
 import { useRoute } from 'vue-router'
 import { computed } from 'vue'
-import {useStore} from "vuex";
+import { useStore } from 'vuex';
 
 export default {
   setup() {
+    const store = useStore();
     const route = useRoute();
-    const store = useStore()
-    let route_name = computed(() => route.name);
+    let route_name = computed(() => route.name)
 
     const logout = () => {
       store.dispatch("logout");
     }
+
     return {
       route_name,
       logout

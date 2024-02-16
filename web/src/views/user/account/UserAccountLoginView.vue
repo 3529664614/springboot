@@ -24,6 +24,7 @@ import ContentField from '../../../components/ContentField.vue'
 import { useStore } from 'vuex'
 import { ref } from 'vue'
 import router from '../../../router/index'
+import $ from 'jquery'
 
 export default {
   components: {
@@ -34,18 +35,89 @@ export default {
     let username = ref('');
     let password = ref('');
     let error_message = ref('');
-    const jwt_token = localStorage.getItem("jwt-token");
+
+    const jwt_token = localStorage.getItem("jwt_token");
     if (jwt_token) {
       store.commit("updateToken", jwt_token);
       store.dispatch("getinfo", {
         success() {
-          router.push({name: "home"});
+          router.push({ name: "home" });
+          store.commit("updatePullingInfo", false);
         },
         error() {
-
+          store.commit("updatePullingInfo", false);
         }
-      });
+      })
+    } else {
+      store.commit("updatePullingInfo", false);
     }
+    // $.ajax({
+    //   url: "http://localhost:3000/user/bot/add/",
+    //   type: "post",
+    //   data: {
+    //     title: "ojw",
+    //     description: "ojw",
+    //     content: "ojw",
+    //   },
+    //   headers: {
+    //     Authorization: "Bearer " + store.state.user.token
+    //   },
+    //   success(resp) {
+    //     console.log(resp);
+    //   },
+    //   error(resp) {
+    //     console.log(resp);
+    //   }
+    // })
+    // $.ajax({
+    //   url: "http://localhost:3000/user/bot/getlist/",
+    //   type: "get",
+    //   headers: {
+    //     Authorization: "Bearer " + store.state.user.token
+    //   },
+    //   success(resp) {
+    //     console.log(resp);
+    //   },
+    //   error(resp) {
+    //     console.log(resp);
+    //   }
+    // })
+    // $.ajax({
+    //   url: "http://localhost:3000/user/bot/remove/",
+    //   type: "post",
+    //   data: {
+    //     bot_id: 1
+    //   },
+    //   headers: {
+    //     Authorization: "Bearer " + store.state.user.token
+    //   },
+    //   success(resp) {
+    //     console.log(resp);
+    //   },
+    //   error(resp) {
+    //     console.log(resp);
+    //   }
+    // })
+    $.ajax({
+      url: "http://localhost:3000/user/bot/update/",
+      type: "post",
+      data: {
+        bot_id: 2,
+        title: "ojww",
+        description: "ojww",
+        content: "ojwww",
+      },
+      headers: {
+        Authorization: "Bearer " + store.state.user.token
+      },
+      success(resp) {
+        console.log(resp);
+      },
+      error(resp) {
+        console.log(resp);
+      }
+    })
+
     const login = () => {
       error_message.value = "";
       store.dispatch("login", {
@@ -55,6 +127,9 @@ export default {
           store.dispatch("getinfo", {
             success() {
               router.push({ name: 'home' });
+            },
+            error() {
+
             }
           })
         },
@@ -64,12 +139,12 @@ export default {
       })
     }
 
+
     return {
       username,
       password,
       error_message,
       login,
-      jwt_token,
     }
   }
 }
