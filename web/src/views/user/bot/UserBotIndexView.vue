@@ -20,7 +20,7 @@
             <div class="modal fade" id="add-bot-btn" tabindex="-1">
               <div class="modal-dialog modal-xl">
                 <div class="modal-content">
-                    <div class="modal-header">
+                  <div class="modal-header">
                     <h5 class="modal-title">创建Bot</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
@@ -96,7 +96,7 @@
                           </div>
                         </div>
                         <div class="modal-footer">
-                          <div class="error-message">{{ bot.error_message }}</div>
+                          <div class="error-message">{{botadd.error_message }}</div>
                           <button type="button" class="btn btn-primary" @click="update_bot(bot)">保存修改</button>
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
                         </div>
