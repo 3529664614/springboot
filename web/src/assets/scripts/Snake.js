@@ -48,13 +48,12 @@ export class Snake extends AcGameObject {
         this.step ++ ;
         this.direction = -1;
         this.status = "move";
+
         const k = this.cells.length;
         for (let i = k; i > 0; -- i) {
             this.cells[i] = JSON.parse(JSON.stringify(this.cells[i - 1]));
         }
-        if (!this.gamemap.check_valid(this.next_cell)) {
-            this.status = "die";
-        }
+
     }
 
     check_tail_increasing() {
